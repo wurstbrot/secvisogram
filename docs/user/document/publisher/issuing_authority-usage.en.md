@@ -15,3 +15,9 @@ Also relevant if there are several teams that issue advisories within the same g
 *Example:*
 
 * Despite the "same" name of "Siemens" and "Siemens Energy", responsibilities can be described more clearly.
+
+The value should be a full text description.
+
+*Example:*
+
+* "Example PSIRT is responsible for any vulnerabilities related to Example products."
