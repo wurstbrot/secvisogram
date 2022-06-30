@@ -183,7 +183,7 @@ def get_dir_content(dir_path: Path, language: str = "en", files_only=False) -> L
     return result
 
 
-LANGUAGE_MD_FILE_NAME_PATTERN = "(.+)[.](.{2,3})[.]md"
+LANGUAGE_MD_FILE_NAME_PATTERN = "(.+usage.*)[.](.{2,3})[.]md"
 
 
 def get_md_language_files(dir_path: Path, language: str = "en") -> List[str]:
@@ -287,6 +287,8 @@ def main(args):
 
     output_file_path = Path(args.output) / args.name
 
+    prev_head_line_text = ""
+
     with open(output_file_path, "w+", encoding="UTF-8") as output_file:
 
         for file_path, (depth, content) in _STATE[PATH_TO_DEPTH_AND_CONTENT].items():
@@ -298,10 +300,16 @@ def main(args):
                         link_anchor = f'<a id="{link_name}"></a>'
                         output_file.write(link_anchor + "\n\n")
 
-            for line in content:
+            head_line = content[0]
+            assert isinstance(head_line, HeaderLine), "files must start with a header line!"
+            head_line_text = head_line.to_text(new_depth=depth).removesuffix(" - Usage")  # TODO: max depth 6
+
+            if head_line_text != prev_head_line_text:
+                output_file.write(head_line_text + "\n")
+                prev_head_line_text = head_line_text
+
+            for line in content[1:]:
                 text = line
-                if isinstance(line, HeaderLine):
-                    text = line.to_text(new_depth=depth)
                 if isinstance(line, LinkLine):
                     text = line.to_text()
                 output_file.write(text + "\n")
