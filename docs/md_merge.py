@@ -70,7 +70,10 @@ class HeaderLine:
     text: str
 
     def to_text(self, new_depth: Optional[int] = None):
-        hashes = "#" * new_depth if new_depth is not None else "#" * self.depth
+        num_hashes = new_depth or self.depth
+        if num_hashes > 6:
+            return f"**{self.text}**"
+        hashes = "#" * num_hashes
         return f"{hashes} {self.text}"
 
 
@@ -302,7 +305,7 @@ def main(args):
 
             head_line = content[0]
             assert isinstance(head_line, HeaderLine), "files must start with a header line!"
-            head_line_text = head_line.to_text(new_depth=depth).removesuffix(" - Usage")  # TODO: max depth 6
+            head_line_text = head_line.to_text(new_depth=depth).replace(" - Usage", "")
 
             if head_line_text != prev_head_line_text:
                 output_file.write(head_line_text + "\n")
