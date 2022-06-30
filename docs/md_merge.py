@@ -295,8 +295,8 @@ def main(args):
                     raise ValueError(f"Linked file '{str(linked_path)}' does not exist! (link in '{str(file_path)}')")
                 if file_path.samefile(linked_path):
                     for link_name in link_names:
-                        link_anchor = f'<a name="{link_name}"></a>'
-                        output_file.write(link_anchor + "\n")
+                        link_anchor = f'<a id="{link_name}"></a>'
+                        output_file.write(link_anchor + "\n\n")
 
             for line in content:
                 text = line

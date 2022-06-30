@@ -48,7 +48,7 @@ The following rules apply:
 
 ## Semantic versioning
 
-Semantic versioning derived the rules from [[SemVer]](#semver). The regular expression for this type is:
+Semantic versioning derived the rules from [[SemVer]](#semver2). The regular expression for this type is:
 
 ```regexp
 ^((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?)$
@@ -145,6 +145,6 @@ The goal of this structure is to provide additional information to the end user 
 
 ___
 
-<a name="semver"/>**[SemVer]**
+<a id="semver2"/>**[SemVer]**
 
 *Semantic Versioning 2.0.0*, T. Preston-Werner, June 2013, [https://semver.org/](https://semver.org/).

@@ -16,10 +16,10 @@ See [[PURL]](#purl) for details.
 
 ___
 
-<a name="purl"/>**[PURL]**
+<a id="purl"/>**[PURL]**
 
 *Package URL (PURL)*, GitHub Project, [https://github.com/package-url/purl-spec](https://github.com/package-url/purl-spec).
 
-<a name="rfc3986"/>[RFC3986]
+<a id="rfc3986"/>[RFC3986]
 
 Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform Resource Identifier (URI): Generic Syntax", STD 66, RFC 3986, DOI 10.17487/RFC3986, January 2005, [https://www.rfc-editor.org/info/rfc3986](https://www.rfc-editor.org/info/rfc3986).
