@@ -1,4 +1,4 @@
-# Category - Usage
+**Category - Usage**
 
 This value sets and should always be the profile name for the CSAF document.
 

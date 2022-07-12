@@ -1,4 +1,4 @@
-# Product ID - Usage
+**Product ID - Usage**
 
 Used to reference the product later in the document. There is no form specification.
 The value is usually assigned by the generator.

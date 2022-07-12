@@ -1,4 +1,4 @@
-# Number - Usage
+**Number - Usage**
 
 The version number should be included in each revision history element.
 The value is the version that was published or is derived from that version.

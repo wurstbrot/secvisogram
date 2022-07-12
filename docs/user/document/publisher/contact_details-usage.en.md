@@ -1,4 +1,4 @@
-# Contact Details - Usage
+**Contact Details - Usage**
 
 Lists means of contacting the publisher of the Advisories.
 

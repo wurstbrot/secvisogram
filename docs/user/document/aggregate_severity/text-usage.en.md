@@ -1,4 +1,4 @@
-# Text - Usage
+**Text - Usage**
 
 Represents overall assessment and should be a manufacturer-specific enum.
 

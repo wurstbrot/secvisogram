@@ -1,4 +1,4 @@
-# Lang - Usage
+**Lang - Usage**
 
 Should be a valid language code.
 Should not contain subtags reserved for private use.
