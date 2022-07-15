@@ -45,8 +45,14 @@ export default function JsonEditorTab({
 }) {
   const { doc } = formValues
 
-  const [editor, setEditor] = React.useState(/** @type {MonacoEditor} */ null)
-  const [monaco, setMonaco] = React.useState(/** @type {any} */ null)
+  const [editor, setEditor] = React.useState(
+    /** @type {import ("react-monaco-editor").monaco.editor.IStandaloneCodeEditor | null} */ (
+      null
+    )
+  )
+  const [monaco, setMonaco] = React.useState(
+    /** @type {import ("react-monaco-editor").monaco | null} */ (null)
+  )
 
   const stringifiedDoc = React.useMemo(
     () => JSON.stringify(doc, null, 2),
@@ -78,21 +84,21 @@ export default function JsonEditorTab({
 
   const confirmMin = () => {
     onNewDocMin().then((newDoc) => {
-      editor.getModel().setValue(JSON.stringify(newDoc, null, 2))
+      editor?.getModel()?.setValue(JSON.stringify(newDoc, null, 2))
     })
     hideMin()
   }
 
   const confirmMax = () => {
     onNewDocMax().then((newDoc) => {
-      editor.getModel().setValue(JSON.stringify(newDoc, null, 2))
+      editor?.getModel()?.setValue(JSON.stringify(newDoc, null, 2))
     })
     hideMax()
   }
 
   const handleOpen = (/** @type {File} */ file) => {
     onOpen(file).then((openedDoc) => {
-      editor.getModel().setValue(JSON.stringify(openedDoc, null, 2))
+      editor?.getModel()?.setValue(JSON.stringify(openedDoc, null, 2))
     })
   }
 
@@ -127,7 +133,7 @@ export default function JsonEditorTab({
   }, [errors])
 
   React.useEffect(() => {
-    if (monaco && doc) {
+    if (monaco && editor && doc) {
       let errorList = []
       let result = jsonMap.stringify(doc, null, 2)
       for (const e of errors) {
@@ -140,12 +146,31 @@ export default function JsonEditorTab({
           endLineNumber: positionData.valueEnd.line + 1,
           endColumn: positionData.valueEnd.column + 1,
           message: e.message,
-          severity: monaco.MarkerSeverity.error,
+          severity: monaco.MarkerSeverity.Error,
         })
       }
-      monaco.editor.setModelMarkers(editor.getModel(), 'setMarkers', errorList)
+      const model = editor.getModel()
+      if (model) {
+        monaco.editor.setModelMarkers(model, 'setMarkers', errorList)
+      }
     }
-  }, [errors])
+  }, [errors, monaco, editor, doc])
+
+  const setCursor = (/** @type {string} */ jsonPath) => {
+    if (editor) {
+      let result = jsonMap.stringify(doc, null, 2)
+
+      let positionData = result.pointers[jsonPath]
+      if (positionData) {
+        editor.setPosition({
+          lineNumber: positionData.value.line + 1,
+          column: positionData.value.column + 2,
+        })
+        editor.revealLine(positionData.value.line + 1)
+        editor.focus()
+      }
+    }
+  }
 
   const {
     show: showMin,
@@ -196,13 +221,7 @@ export default function JsonEditorTab({
 
   const editorWillMount = () => {}
 
-  const onChangeMonaco = (
-    /** @type {any} */ newValue,
-    /** @type {any} */ e
-  ) => {
-    // console.log('onChangeMonaco', newValue, e)
-    console.log(editor.getModel().getAllDecorations())
-
+  const onChangeMonaco = (/** @type {any} */ newValue) => {
     setState((state) => ({
       ...state,
       value: newValue,
@@ -248,7 +267,15 @@ export default function JsonEditorTab({
               <div className="mx-2 flex-grow overflow-auto h-full">
                 {errors.map((error, i) => (
                   <div key={i}>
-                    <b>{error.instancePath}</b>: {error.message}
+                    <a
+                      href={'#' + error.instancePath}
+                      onClick={() => {
+                        setCursor(error.instancePath)
+                      }}
+                      className="underline"
+                    >
+                      <b>{error.instancePath}</b>: {error.message}
+                    </a>
                   </div>
                 ))}
               </div>
@@ -295,7 +322,7 @@ export default function JsonEditorTab({
               accept="application/json"
               onChange={(e) => {
                 if (!e.target.files || !e.target.files[0]) return
-                if (e.target.files[0].size > 1 * 1024 * 1024) {
+                if (e.target.files[0].size > 1024 * 1024) {
                   window.alert('File too large!')
                   return
                 }
