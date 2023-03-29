@@ -53,13 +53,13 @@ export default React.forwardRef(
                 )
                 const url = /** @type {string} */ (formData.get('url'))
                 const file = /** @type {File} */ (formData.get('file'))
-                onSubmit(
-                  source === 'FILESYSTEM'
-                    ? { source: 'FILESYSTEM', file }
-                    : source === 'TEMPLATE'
-                    ? { source: 'TEMPLATE', templateId }
-                    : { source: 'URL', url }
-                )
+                if (source === 'FILESYSTEM') {
+                  onSubmit({ source: 'FILESYSTEM', file })
+                } else if (source === 'TEMPLATE') {
+                  onSubmit({ source: 'TEMPLATE', templateId })
+                } else {
+                  onSubmit({ source: 'URL', url })
+                }
               }}
             >
               <div className="p-4 flex flex-col gap-2">
