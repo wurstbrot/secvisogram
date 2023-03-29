@@ -370,9 +370,12 @@ function View({
                     case 'URL':
                       externalJsonToFile(params.url)
                         .then(onOpen)
-                        .catch(() =>
+                        .catch((err) =>
                           handleError({
-                            message: t('error.failedToLoadFromURL'),
+                            message:
+                              err.name == 'SyntaxError'
+                                ? t('error.invalidJSON')
+                                : t('error.failedToLoadFromURL'),
                           })
                         )
                       break
@@ -417,9 +420,12 @@ function View({
                     case 'URL':
                       externalJsonToFile(params.url)
                         .then(onOpen)
-                        .catch(() =>
+                        .catch((err) =>
                           handleError({
-                            message: t('error.failedToLoadFromURL'),
+                            message:
+                              err.name == 'SyntaxError'
+                                ? t('error.invalidJSON')
+                                : t('error.failedToLoadFromURL'),
                           })
                         )
                       break
