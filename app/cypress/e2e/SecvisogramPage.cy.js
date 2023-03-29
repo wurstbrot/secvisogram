@@ -211,7 +211,7 @@ describe('SecvisogramPage', () => {
     }
   })
 
-  describe.only('can create a minimal new document from URL in standalone mode', function () {
+  describe('can create a minimal new document from URL in standalone mode', function () {
     const testDocURL = 'http://localhost:22222/test.json'
     it(`in form editor`, function () {
       cy.intercept(testDocURL, {
@@ -268,9 +268,7 @@ describe('SecvisogramPage', () => {
 
       cy.get(`[data-testid="new_document-create_document_button"]`).click()
       cy.wait('@testJson')
-      cy.contains(
-        'Failed to load from URL. The server may be unreachable or the resource cannot be accessed due to CORS restrictions.'
-      )
+      cy.contains('Failed to parse JSON file.')
     })
   })
 

@@ -124,7 +124,7 @@
     "documentInvalidCantPublish": "The document is not valid and can therefore not be published.",
     "encounteredErrorWithCode": "Encountered an error with status code: ",
     "failedToLoadFromURL": "Failed to load from URL. The server may be unreachable or the resource cannot be accessed due to CORS restrictions.",
-    "invalidJSON": "Failed to parse JSON file"
+    "invalidJSON": "Failed to parse JSON file."
   },
   "errorScreen": {
     "close": "Close",
