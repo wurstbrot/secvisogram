@@ -25,7 +25,7 @@ This document describes the Security Considerations made during the development 
 
 > Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker's hostile data can trick the interpreter into executing unintended commands or accessing data without proper authorization.
 
-Secvisogram is a client-only application and does not store/retrieve any dynamic, server-side content.
+Secvisogram is a client-only application and does not store/retrieve any dynamic, server-side content, except when being asked for.
 
 The user can make modifications or process input in one of only four ways:
 
