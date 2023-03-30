@@ -54,7 +54,7 @@ Secvisogram is a public, stateless, client-side browser application requiring no
 
 > Many web applications and APIs do not properly protect sensitive data, such as financial, healthcare, and PII. Attackers may steal or modify such weakly protected data to conduct credit card fraud, identity theft, or other crimes. Sensitive data may be compromised without extra protection, such as encryption at rest or in transit, and requires special precautions when exchanged with the browser.
 
-Secvisogram is a pure client-side, browser-only application. No content data is transferred over the network with the exception of loading a JSON file from an URL. The user can load & save local files. Secvisogram cannot ensure the integrity and proper handling of files created and stored by the user on his local system, nor of files loaded from a URL
+Secvisogram is a pure client-side, browser-only application. No content data is transferred over the network with the exception of loading a JSON file from an URL. The user can load & save local files. Secvisogram cannot ensure the integrity and proper handling of files created and stored by the user on his local system, nor of files loaded from a URL.
 
 This consideration implies that the Secvisogram program is trustworthy and not tampered. Therefore, Secvisogram should be hosted on a reliable endpoint properly secured by TLS transports.
 
